@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍉</text></svg>">
+
+  <!-- 1) Primäres Icon: farbiges Emoji-SVG -->
+  <link rel="icon"
+        type="image/svg+xml"
+        href="https://upload.wikimedia.org/wikipedia/commons/c/ce/Emoji_u1f349.svg">
+
+  <!-- 2) PNG-Fallback für Browser ohne farbige SVG-Emojis -->
+  <link rel="icon"
+        type="image/png"
+        sizes="256x256"
+        href="https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/watermelon.png">
+
     <title>Essen Tracker</title>
     <style>
         * {
@@ -11,23 +23,23 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-        
+
         .container {
             max-width: 450px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
-        
+
         .header {
             background: linear-gradient(45deg, #ff6b6b, #feca57);
             color: white;
@@ -35,17 +47,17 @@
             text-align: center;
             position: relative;
         }
-        
+
         .header h1 {
             font-size: 24px;
             margin-bottom: 5px;
         }
-        
+
         .header p {
             opacity: 0.9;
             font-size: 14px;
         }
-        
+
         .connection-status {
             position: absolute;
             top: 10px;
@@ -55,22 +67,22 @@
             font-size: 12px;
             font-weight: 600;
         }
-        
+
         .connection-status.connected {
             background: rgba(72, 187, 120, 0.2);
             color: #68d391;
         }
-        
+
         .connection-status.disconnected {
             background: rgba(229, 62, 62, 0.2);
             color: #fc8181;
         }
-        
+
         .tabs {
             display: flex;
             background: #f8f9fa;
         }
-        
+
         .tab {
             flex: 1;
             padding: 15px;
@@ -83,31 +95,31 @@
             color: #718096;
             transition: all 0.3s;
         }
-        
+
         .tab.active {
             background: white;
             color: #667eea;
             border-bottom: 2px solid #667eea;
         }
-        
+
         .tab-content {
             display: none;
         }
-        
+
         .tab-content.active {
             display: block;
         }
-        
+
         .add-section {
             padding: 20px;
             border-bottom: 1px solid #f0f0f0;
         }
-        
+
         .input-group {
             display: flex;
             gap: 10px;
         }
-        
+
         #newFood {
             flex: 1;
             padding: 12px 16px;
@@ -117,11 +129,11 @@
             outline: none;
             transition: border-color 0.3s;
         }
-        
+
         #newFood:focus {
             border-color: #667eea;
         }
-        
+
         #addBtn {
             background: #667eea;
             color: white;
@@ -132,15 +144,15 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-        
+
         #addBtn:hover {
             background: #5a67d8;
         }
-        
+
         .foods-section {
             padding: 20px;
         }
-        
+
         .section-title {
             font-size: 18px;
             margin-bottom: 15px;
@@ -149,7 +161,7 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .food-item {
             display: flex;
             align-items: center;
@@ -160,17 +172,17 @@
             border-radius: 12px;
             transition: all 0.3s;
         }
-        
+
         .food-item:hover {
             background: #e9ecef;
             transform: translateY(-1px);
         }
-        
+
         .food-name {
             font-size: 16px;
             color: #2d3748;
         }
-        
+
         .eaten-btn {
             background: #48bb78;
             color: white;
@@ -181,20 +193,20 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-        
+
         .eaten-btn:hover {
             background: #38a169;
         }
-        
+
         .eaten-btn:disabled {
             background: #cbd5e0;
             cursor: not-allowed;
         }
-        
+
         .history-section {
             padding: 20px;
         }
-        
+
         .date-navigation {
             display: flex;
             align-items: center;
@@ -204,7 +216,7 @@
             background: #f8f9fa;
             border-radius: 12px;
         }
-        
+
         .date-nav-btn {
             background: #667eea;
             color: white;
@@ -215,30 +227,30 @@
             font-size: 14px;
             transition: background 0.3s;
         }
-        
+
         .date-nav-btn:hover {
             background: #5a67d8;
         }
-        
+
         .date-nav-btn:disabled {
             background: #cbd5e0;
             cursor: not-allowed;
         }
-        
+
         .current-date {
             font-weight: 600;
             color: #2d3748;
             text-align: center;
             flex: 1;
         }
-        
+
         .quick-dates {
             display: flex;
             gap: 8px;
             margin-bottom: 15px;
             flex-wrap: wrap;
         }
-        
+
         .quick-date-btn {
             background: #e2e8f0;
             color: #4a5568;
@@ -249,12 +261,13 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        
-        .quick-date-btn:hover, .quick-date-btn.active {
+
+        .quick-date-btn:hover,
+        .quick-date-btn.active {
             background: #667eea;
             color: white;
         }
-        
+
         .history-item {
             display: flex;
             justify-content: space-between;
@@ -264,24 +277,24 @@
             background: white;
             border-radius: 8px;
             border-left: 4px solid #48bb78;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
-        
+
         .history-content {
             flex: 1;
         }
-        
+
         .history-food {
             font-weight: 600;
             color: #2d3748;
         }
-        
+
         .history-time {
             font-size: 12px;
             color: #718096;
             margin-top: 2px;
         }
-        
+
         .delete-btn {
             background: #e53e3e;
             color: white;
@@ -292,75 +305,81 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-        
+
         .delete-btn:hover {
             background: #c53030;
         }
-        
+
         .delete-btn:disabled {
             background: #cbd5e0;
             cursor: not-allowed;
         }
-        
+
         .empty-state {
             text-align: center;
             padding: 30px;
             color: #718096;
         }
-        
+
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
             margin-bottom: 20px;
         }
-        
+
         .stat-card {
             background: white;
             padding: 20px;
             border-radius: 12px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
-        
+
         .stat-number {
             font-size: 24px;
             font-weight: bold;
             color: #667eea;
         }
-        
+
         .stat-label {
             font-size: 12px;
             color: #718096;
             margin-top: 5px;
         }
-        
+
         .loading {
             opacity: 0.6;
             pointer-events: none;
         }
-        
+
         .emoji {
             font-size: 20px;
         }
-        
+
         .sync-indicator {
             display: inline-block;
             margin-left: 8px;
             font-size: 12px;
             color: #718096;
         }
-        
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
-        
+
         .spinning {
             animation: spin 1s linear infinite;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -370,13 +389,13 @@
             <h1>🍽️ Essen Tracker</h1>
             <p>Cloud-Synchronisation mit Firebase</p>
         </div>
-        
+
         <div class="tabs">
             <button class="tab active" onclick="switchTab('add')">➕ Hinzufügen</button>
             <button class="tab" onclick="switchTab('history')">📅 Historie</button>
             <button class="tab" onclick="switchTab('stats')">📊 Statistiken</button>
         </div>
-        
+
         <div id="add-tab" class="tab-content active">
             <div class="add-section">
                 <div class="input-group">
@@ -384,7 +403,7 @@
                     <button id="addBtn">➕</button>
                 </div>
             </div>
-            
+
             <div class="foods-section">
                 <h3 class="section-title">
                     <span class="emoji">🥘</span>
@@ -398,7 +417,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="history-tab" class="tab-content">
             <div class="history-section">
                 <div class="date-navigation">
@@ -406,14 +425,14 @@
                     <div class="current-date" id="currentDate">Heute</div>
                     <button class="date-nav-btn" id="nextBtn" onclick="changeDate(1)">Vor ›</button>
                 </div>
-                
+
                 <div class="quick-dates">
                     <button class="quick-date-btn" onclick="jumpToDate(0)">Heute</button>
                     <button class="quick-date-btn" onclick="jumpToDate(-1)">Gestern</button>
                     <button class="quick-date-btn" onclick="jumpToDate(-7)">Vor 1 Woche</button>
                     <button class="quick-date-btn" onclick="jumpToDate(-30)">Vor 1 Monat</button>
                 </div>
-                
+
                 <div id="historyList">
                     <div class="empty-state">
                         <p>Lade Historie... 🔄</p>
@@ -421,14 +440,14 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="stats-tab" class="tab-content">
             <div class="history-section">
                 <h3 class="section-title">
                     <span class="emoji">📊</span>
                     Deine Statistiken
                 </h3>
-                
+
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-number" id="totalMeals">-</div>
@@ -439,7 +458,7 @@
                         <div class="stat-label">Tage getrackt</div>
                     </div>
                 </div>
-                
+
                 <h4 style="margin-bottom: 15px; color: #2d3748;">🏆 Deine Top Gerichte</h4>
                 <div id="topFoods">
                     <div class="empty-state">
@@ -455,21 +474,21 @@
         // ==========================================
         // 🔥 FIREBASE KONFIGURATION
         // ==========================================
-        
+
         // Import Firebase modules
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-        import { 
-            getFirestore, 
-            collection, 
-            addDoc, 
-            getDocs, 
-            deleteDoc, 
-            doc, 
-            query, 
-            orderBy, 
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            getDocs,
+            deleteDoc,
+            doc,
+            query,
+            orderBy,
             onSnapshot,
             serverTimestamp,
-            where 
+            where
         } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
         // 🔥 DEINE FIREBASE KONFIGURATION
@@ -485,7 +504,7 @@
 
         // Check if Firebase is properly configured
         const isFirebaseConfigured = true; // Now properly configured!
-        
+
         let app, db;
         let foods = [];
         let history = [];
@@ -497,12 +516,12 @@
                 // Initialize Firebase
                 app = initializeApp(firebaseConfig);
                 db = getFirestore(app);
-                
+
                 updateConnectionStatus(true);
-                
+
                 // Setup real-time listeners
                 setupRealtimeListeners();
-                
+
             } catch (error) {
                 console.error('Firebase initialization error:', error);
                 updateConnectionStatus(false);
@@ -592,9 +611,9 @@
                     food: foodName,
                     timestamp: now.getTime(),
                     date: now.toDateString(),
-                    time: now.toLocaleTimeString('de-DE', { 
-                        hour: '2-digit', 
-                        minute: '2-digit' 
+                    time: now.toLocaleTimeString('de-DE', {
+                        hour: '2-digit',
+                        minute: '2-digit'
                     }),
                     createdAt: serverTimestamp()
                 });
@@ -627,14 +646,14 @@
         function loadFromLocalStorage() {
             const savedFoods = JSON.parse(localStorage.getItem('favoriteFoods') || '[]');
             const savedHistory = JSON.parse(localStorage.getItem('foodHistory') || '[]');
-            
+
             foods = savedFoods.map(name => ({ name, id: Math.random().toString() }));
             history = savedHistory.map(item => ({
                 ...item,
                 id: item.id || Math.random().toString(),
                 timestamp: item.timestamp || Date.now()
             }));
-            
+
             renderFoods();
             renderHistory();
             renderStats();
@@ -661,9 +680,9 @@
             history.unshift({
                 id: Math.random().toString(),
                 food: foodName,
-                time: now.toLocaleTimeString('de-DE', { 
-                    hour: '2-digit', 
-                    minute: '2-digit' 
+                time: now.toLocaleTimeString('de-DE', {
+                    hour: '2-digit',
+                    minute: '2-digit'
                 }),
                 timestamp: now.getTime(),
                 date: now.toDateString()
@@ -707,10 +726,10 @@
         function switchTab(tabName) {
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            
+
             document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
             document.getElementById(`${tabName}-tab`).classList.add('active');
-            
+
             if (tabName === 'history') {
                 renderHistory();
             } else if (tabName === 'stats') {
@@ -721,7 +740,7 @@
         function addFood() {
             const input = document.getElementById('newFood');
             const foodName = input.value.trim();
-            
+
             if (foodName && !foods.find(f => f.name === foodName)) {
                 input.value = '';
                 addFoodToFirebase(foodName);
@@ -752,7 +771,7 @@
 
         function renderFoods() {
             const container = document.getElementById('foodsList');
-            
+
             if (foods.length === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
@@ -761,7 +780,7 @@
                 `;
                 return;
             }
-            
+
             container.innerHTML = foods.map(food => `
                 <div class="food-item">
                     <span class="food-name">${food.name}</span>
@@ -776,11 +795,11 @@
             const container = document.getElementById('historyList');
             const dateDisplay = document.getElementById('currentDate');
             const nextBtn = document.getElementById('nextBtn');
-            
+
             const today = new Date();
             const viewDate = currentViewDate.toDateString();
             const todayString = today.toDateString();
-            
+
             let dateLabel;
             if (viewDate === todayString) {
                 dateLabel = 'Heute';
@@ -790,24 +809,24 @@
                 if (viewDate === yesterday.toDateString()) {
                     dateLabel = 'Gestern';
                 } else {
-                    dateLabel = currentViewDate.toLocaleDateString('de-DE', { 
-                        weekday: 'long', 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric' 
+                    dateLabel = currentViewDate.toLocaleDateString('de-DE', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
                     });
                 }
             }
-            
+
             dateDisplay.textContent = dateLabel;
             nextBtn.disabled = viewDate === todayString;
-            
+
             const viewDateString = currentViewDate.toDateString();
             const dayHistory = history.filter(item => {
                 const itemDate = new Date(item.timestamp).toDateString();
                 return itemDate === viewDateString;
             });
-            
+
             if (dayHistory.length === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
@@ -816,9 +835,9 @@
                 `;
                 return;
             }
-            
+
             dayHistory.sort((a, b) => b.timestamp - a.timestamp);
-            
+
             container.innerHTML = dayHistory.map((item) => `
                 <div class="history-item">
                     <div class="history-content">
@@ -834,23 +853,23 @@
 
         function renderStats() {
             document.getElementById('totalMeals').textContent = history.length;
-            
-            const uniqueDays = new Set(history.map(item => 
+
+            const uniqueDays = new Set(history.map(item =>
                 new Date(item.timestamp).toDateString()
             ));
             document.getElementById('daysTracked').textContent = uniqueDays.size;
-            
+
             const foodCounts = {};
             history.forEach(item => {
                 foodCounts[item.food] = (foodCounts[item.food] || 0) + 1;
             });
-            
+
             const sortedFoods = Object.entries(foodCounts)
-                .sort(([,a], [,b]) => b - a)
+                .sort(([, a], [, b]) => b - a)
                 .slice(0, 5);
-            
+
             const topFoodsContainer = document.getElementById('topFoods');
-            
+
             if (sortedFoods.length === 0) {
                 topFoodsContainer.innerHTML = `
                     <div class="empty-state">
@@ -859,7 +878,7 @@
                 `;
                 return;
             }
-            
+
             topFoodsContainer.innerHTML = sortedFoods.map(([food, count], index) => `
                 <div class="history-item">
                     <div class="history-content">
@@ -872,7 +891,7 @@
 
         // Event Listeners
         document.getElementById('addBtn').addEventListener('click', addFood);
-        document.getElementById('newFood').addEventListener('keypress', function(e) {
+        document.getElementById('newFood').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 addFood();
             }
@@ -893,4 +912,5 @@
 
     </script>
 </body>
+
 </html>
