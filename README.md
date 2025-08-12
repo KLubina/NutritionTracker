@@ -4,8 +4,6 @@ How I pushed it into GitHub: https://claude.ai/chat/e049ee10-0bea-46b5-892b-bb5a
 
 How the app was created: https://claude.ai/chat/7e463265-6ee5-4a0e-a518-79ace9419355
 
-Großartig! Hier ist der komplette Workflow für Änderungen:
-
 ## **Workflow für Änderungen: GitHub + Firebase**
 
 ### 1. **Änderungen zu GitHub pushen**
@@ -46,6 +44,3 @@ git push
 # 3. Zu Firebase:
 firebase deploy
 ```
-
-## **Pro-Tipp: Automatisches Deployment**
-Du kannst auch GitHub Actions einrichten, damit bei jedem Push automatisch zu Firebase deployed wird! Willst du das auch einrichten?
