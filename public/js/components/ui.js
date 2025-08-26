@@ -17,7 +17,7 @@ class UIComponents {
             status.textContent = '🟢 Firebase Verbunden';
             status.className = 'connection-status connected';
         } else {
-            status.textContent = '🔴 Lokaler Modus';
+            status.textContent = '🔴 Nicht verbunden';
             status.className = 'connection-status disconnected';
         }
     }
