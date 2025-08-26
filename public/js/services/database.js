@@ -34,7 +34,7 @@ class DatabaseService {
     }
 
 
-    // Loading the nutrition history
+    // #region Loading the nutrition history
     setupRealtimeListeners() {
         try {
             const foodsQuery = query(collection(db, 'foods'), orderBy('createdAt', 'desc'));
@@ -69,11 +69,9 @@ class DatabaseService {
             this.setSyncIndicator('❌');
         }
     }
+    // #endregion
 
-    //
-    // CRUD-Operations to the database
-    //
-    
+    // #region CRUD-Operations to the database
     async addFood(foodName) {
         if (!db) return;
         try {
@@ -116,9 +114,9 @@ class DatabaseService {
             this.setSyncIndicator('❌');
         }
     }
+    // #endregion
 
-    // Utility methods
-
+    // #region Utility methods
     setSyncIndicator(icon, spinning = false) {
         const indicator = document.getElementById('syncIndicator');
         if (indicator) {
@@ -139,6 +137,7 @@ class DatabaseService {
         if (this.unsubscribeFoods) this.unsubscribeFoods();
         if (this.unsubscribeHistory) this.unsubscribeHistory();
     }
+    // #endregion
 }
 
 export default DatabaseService;
