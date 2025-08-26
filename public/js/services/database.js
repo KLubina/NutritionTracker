@@ -1,7 +1,3 @@
-// ==========================================
-// 💾 DATABASE SERVICE
-// ==========================================
-
 import {
     db,
     isFirebaseConfigured,
@@ -24,75 +20,62 @@ class DatabaseService {
         this.syncCallback = null;
     }
 
-    // ==========================================
-    // 🔧 INITIALIZATION
-    // ==========================================
-
     init(syncCallback) {
         this.syncCallback = syncCallback;
-        
+
         if (isFirebaseConfigured && db) {
             this.setupRealtimeListeners();
             return true;
         } else {
-            this.loadFromLocalStorage();
+            console.error('Firebase ist nicht konfiguriert oder db ist nicht verfügbar.');
+            this.setSyncIndicator('❌');
             return false;
         }
     }
 
-    // ==========================================
-    // 🔄 REAL-TIME LISTENERS
-    // ==========================================
 
+    // Loading the nutrition history
     setupRealtimeListeners() {
         try {
-            // Listen to foods collection
             const foodsQuery = query(collection(db, 'foods'), orderBy('createdAt', 'desc'));
-            this.unsubscribeFoods = onSnapshot(foodsQuery, (snapshot) => {
-                this.foods = [];
-                snapshot.forEach((doc) => {
-                    this.foods.push({
-                        id: doc.id,
-                        ...doc.data()
-                    });
-                });
-                this.syncCallback('foods', this.foods);
-                this.setSyncIndicator('✅');
-            }, (error) => {
-                console.error('Error listening to foods:', error);
-                this.setSyncIndicator('❌');
-            });
+            this.unsubscribeFoods = onSnapshot(
+                foodsQuery,
+                (snapshot) => {
+                    this.foods = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+                    this.syncCallback?.('foods', this.foods);
+                    this.setSyncIndicator('✅');
+                },
+                (error) => {
+                    console.error('Error listening to foods:', error);
+                    this.setSyncIndicator('❌');
+                }
+            );
 
-            // Listen to history collection  
             const historyQuery = query(collection(db, 'history'), orderBy('timestamp', 'desc'));
-            this.unsubscribeHistory = onSnapshot(historyQuery, (snapshot) => {
-                this.history = [];
-                snapshot.forEach((doc) => {
-                    this.history.push({
-                        id: doc.id,
-                        ...doc.data()
-                    });
-                });
-                this.syncCallback('history', this.history);
-                this.setSyncIndicator('✅');
-            }, (error) => {
-                console.error('Error listening to history:', error);
-                this.setSyncIndicator('❌');
-            });
-
+            this.unsubscribeHistory = onSnapshot(
+                historyQuery,
+                (snapshot) => {
+                    this.history = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+                    this.syncCallback?.('history', this.history);
+                    this.setSyncIndicator('✅');
+                },
+                (error) => {
+                    console.error('Error listening to history:', error);
+                    this.setSyncIndicator('❌');
+                }
+            );
         } catch (error) {
             console.error('Error setting up listeners:', error);
             this.setSyncIndicator('❌');
         }
     }
 
-    // ==========================================
-    // 🔥 FIREBASE OPERATIONS
-    // ==========================================
-
+    //
+    // CRUD-Operations to the database
+    //
+    
     async addFood(foodName) {
-        if (!db) return this.addFoodToLocalStorage(foodName);
-
+        if (!db) return;
         try {
             this.setSyncIndicator('🔄', true);
             await addDoc(collection(db, 'foods'), {
@@ -102,13 +85,11 @@ class DatabaseService {
         } catch (error) {
             console.error('Error adding food:', error);
             this.setSyncIndicator('❌');
-            this.addFoodToLocalStorage(foodName);
         }
     }
 
     async addHistory(foodName) {
-        if (!db) return this.addHistoryToLocalStorage(foodName);
-
+        if (!db) return;
         try {
             this.setSyncIndicator('🔄', true);
             const now = new Date();
@@ -116,22 +97,17 @@ class DatabaseService {
                 food: foodName,
                 timestamp: now.getTime(),
                 date: now.toDateString(),
-                time: now.toLocaleTimeString('de-DE', {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                }),
+                time: now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' }),
                 createdAt: serverTimestamp()
             });
         } catch (error) {
             console.error('Error adding history:', error);
             this.setSyncIndicator('❌');
-            this.addHistoryToLocalStorage(foodName);
         }
     }
 
     async deleteHistory(historyId) {
-        if (!db) return this.deleteHistoryFromLocalStorage(historyId);
-
+        if (!db) return;
         try {
             this.setSyncIndicator('🔄', true);
             await deleteDoc(doc(db, 'history', historyId));
@@ -141,69 +117,7 @@ class DatabaseService {
         }
     }
 
-    // ==========================================
-    // 💾 LOCAL STORAGE FALLBACK
-    // ==========================================
-
-    loadFromLocalStorage() {
-        const savedFoods = JSON.parse(localStorage.getItem('favoriteFoods') || '[]');
-        const savedHistory = JSON.parse(localStorage.getItem('foodHistory') || '[]');
-
-        this.foods = savedFoods.map(name => ({ name, id: Math.random().toString() }));
-        this.history = savedHistory.map(item => ({
-            ...item,
-            id: item.id || Math.random().toString(),
-            timestamp: item.timestamp || Date.now()
-        }));
-
-        this.syncCallback('foods', this.foods);
-        this.syncCallback('history', this.history);
-    }
-
-    saveToLocalStorage() {
-        localStorage.setItem('favoriteFoods', JSON.stringify(this.foods.map(f => f.name)));
-        localStorage.setItem('foodHistory', JSON.stringify(this.history));
-    }
-
-    addFoodToLocalStorage(foodName) {
-        if (!this.foods.find(f => f.name === foodName)) {
-            this.foods.unshift({
-                id: Math.random().toString(),
-                name: foodName
-            });
-            this.saveToLocalStorage();
-            this.syncCallback('foods', this.foods);
-        }
-    }
-
-    addHistoryToLocalStorage(foodName) {
-        const now = new Date();
-        this.history.unshift({
-            id: Math.random().toString(),
-            food: foodName,
-            time: now.toLocaleTimeString('de-DE', {
-                hour: '2-digit',
-                minute: '2-digit'
-            }),
-            timestamp: now.getTime(),
-            date: now.toDateString()
-        });
-        this.saveToLocalStorage();
-        this.syncCallback('history', this.history);
-    }
-
-    deleteHistoryFromLocalStorage(historyId) {
-        const index = this.history.findIndex(item => item.id === historyId);
-        if (index > -1) {
-            this.history.splice(index, 1);
-            this.saveToLocalStorage();
-            this.syncCallback('history', this.history);
-        }
-    }
-
-    // ==========================================
-    // 🔧 UTILITY METHODS
-    // ==========================================
+    // Utility methods
 
     setSyncIndicator(icon, spinning = false) {
         const indicator = document.getElementById('syncIndicator');
@@ -220,10 +134,6 @@ class DatabaseService {
     getHistory() {
         return this.history;
     }
-
-    // ==========================================
-    // 🧹 CLEANUP
-    // ==========================================
 
     cleanup() {
         if (this.unsubscribeFoods) this.unsubscribeFoods();
