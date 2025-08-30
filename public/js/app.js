@@ -14,6 +14,9 @@ class EssenTrackerApp {
         this.setupGlobalFunctions();
         this.setupCleanup();
 
+        // Initialisiere Database mit Sync-Callback - WICHTIG für Navigation!
+        this.database.init(this.handleDataSync.bind(this));
+
         this.isInitialized = true;
     }
 
