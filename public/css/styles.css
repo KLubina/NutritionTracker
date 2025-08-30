@@ -1,7 +1,4 @@
-/* ==========================================
-   🎨 GLOBAL STYLES
-   ========================================== */
-
+/* #region GLOBAL STYLES */
 * {
     margin: 0;
     padding: 0;
@@ -14,11 +11,9 @@ body {
     min-height: 100vh;
     padding: 20px;
 }
+/* #endregion */
 
-/* ==========================================
-   📱 CONTAINER & LAYOUT
-   ========================================== */
-
+/* #region CONTAINER & LAYOUT */
 .container {
     max-width: 450px;
     margin: 0 auto;
@@ -45,11 +40,9 @@ body {
     opacity: 0.9;
     font-size: 14px;
 }
+/* #endregion */
 
-/* ==========================================
-   🔗 CONNECTION STATUS
-   ========================================== */
-
+/* #region CONNECTION STATUS */
 .connection-status {
     position: absolute;
     top: 10px;
@@ -69,11 +62,9 @@ body {
     background: rgba(229, 62, 62, 0.2);
     color: #fc8181;
 }
+/* #endregion */
 
-/* ==========================================
-   📑 TABS
-   ========================================== */
-
+/* #region TABS */
 .tabs {
     display: flex;
     background: #f8f9fa;
@@ -105,11 +96,9 @@ body {
 .tab-content.active {
     display: block;
 }
+/* #endregion */
 
-/* ==========================================
-   ➕ ADD SECTION
-   ========================================== */
-
+/* #region  ADD SECTION */
 .add-section {
     padding: 20px;
     border-bottom: 1px solid #f0f0f0;
@@ -148,11 +137,9 @@ body {
 #addBtn:hover {
     background: #5a67d8;
 }
+/* #endregion */
 
-/* ==========================================
-   🥘 FOODS SECTION
-   ========================================== */
-
+/* #region  FOODS SECTION */
 .foods-section {
     padding: 20px;
 }
@@ -206,11 +193,9 @@ body {
     background: #cbd5e0;
     cursor: not-allowed;
 }
+/* #endregion */
 
-/* ==========================================
-   📅 HISTORY SECTION
-   ========================================== */
-
+/* #region  HISTORY SECTION */
 .history-section {
     padding: 20px;
 }
@@ -323,10 +308,7 @@ body {
     cursor: not-allowed;
 }
 
-/* ==========================================
-   📊 STATS SECTION
-   ========================================== */
-
+/* #region  STATS SECTION */
 .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -353,11 +335,9 @@ body {
     color: #718096;
     margin-top: 5px;
 }
+/* #endregion */
 
-/* ==========================================
-   🔄 LOADING & STATES
-   ========================================== */
-
+/* #region LOADING & STATES */
 .empty-state {
     text-align: center;
     padding: 30px;
@@ -379,11 +359,9 @@ body {
 .emoji {
     font-size: 20px;
 }
+/* #endregion */
 
-/* ==========================================
-   🔄 ANIMATIONS
-   ========================================== */
-
+/* #region ANIMATIONS */
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -396,3 +374,4 @@ body {
 .spinning {
     animation: spin 1s linear infinite;
 }
+/* #endregion */
