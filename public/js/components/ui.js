@@ -3,21 +3,6 @@ class UIComponents {
     this.currentViewDate = new Date();
   }
 
-  // ==========================================
-  // 🔗 CONNECTION STATUS
-  // ==========================================
-
-  updateConnectionStatus(connected) {
-    const status = document.getElementById("connectionStatus");
-    if (connected) {
-      status.textContent = "🟢 Firebase Verbunden";
-      status.className = "connection-status connected";
-    } else {
-      status.textContent = "🔴 Nicht verbunden";
-      status.className = "connection-status disconnected";
-    }
-  }
-
   //#region 📑 TAB MANAGEMENT
   switchTab(tabName) {
     document
