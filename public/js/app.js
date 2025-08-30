@@ -1,7 +1,3 @@
-// ==========================================
-// 🚀 MAIN APPLICATION
-// ==========================================
-
 import DatabaseService from './services/database.js';
 import UIComponents from './components/ui.js';
 
@@ -12,36 +8,16 @@ class EssenTrackerApp {
         this.isInitialized = false;
     }
 
-    // ==========================================
     // 🚀 APP INITIALIZATION
-    // ==========================================
-
     init() {
-        console.log('🍽️ Initializing Essen Tracker App...');
-
-        // Initialize database with sync callback
-        const isFirebaseConnected = this.database.init(this.handleDataSync.bind(this));
-        
-        // Update connection status
-        this.ui.updateConnectionStatus(isFirebaseConnected);
-
-        // Setup event listeners
         this.setupEventListeners();
-
-        // Setup global functions for onclick handlers
         this.setupGlobalFunctions();
-
-        // Setup cleanup on page unload
         this.setupCleanup();
 
         this.isInitialized = true;
-        console.log('✅ App initialized successfully!');
     }
 
-    // ==========================================
     // 🔄 DATA SYNCHRONIZATION
-    // ==========================================
-
     handleDataSync(dataType, data) {
         switch (dataType) {
             case 'foods':
@@ -54,10 +30,7 @@ class EssenTrackerApp {
         }
     }
 
-    // ==========================================
     // 🎯 CORE FUNCTIONS
-    // ==========================================
-
     addFood() {
         const foodName = this.ui.getInputValue();
 
@@ -75,10 +48,7 @@ class EssenTrackerApp {
         this.database.deleteHistory(historyId);
     }
 
-    // ==========================================
     // 📅 DATE NAVIGATION
-    // ==========================================
-
     changeDate(direction) {
         this.ui.changeDate(direction);
         this.ui.renderHistory(this.database.getHistory(), this.deleteHistoryItem.bind(this));
@@ -89,10 +59,7 @@ class EssenTrackerApp {
         this.ui.renderHistory(this.database.getHistory(), this.deleteHistoryItem.bind(this));
     }
 
-    // ==========================================
     // 📑 TAB MANAGEMENT
-    // ==========================================
-
     switchTab(tabName) {
         this.ui.switchTab(tabName);
         
@@ -104,10 +71,7 @@ class EssenTrackerApp {
         }
     }
 
-    // ==========================================
     // 🎧 EVENT LISTENERS
-    // ==========================================
-
     setupEventListeners() {
         // Add button click
         document.getElementById('addBtn').addEventListener('click', () => {
@@ -127,10 +91,7 @@ class EssenTrackerApp {
         }, 100);
     }
 
-    // ==========================================
     // 🌐 GLOBAL FUNCTIONS
-    // ==========================================
-
     setupGlobalFunctions() {
         // Make functions available for onclick handlers
         window.switchTab = this.switchTab.bind(this);
@@ -140,10 +101,7 @@ class EssenTrackerApp {
         window.jumpToDate = this.jumpToDate.bind(this);
     }
 
-    // ==========================================
     // 🧹 CLEANUP
-    // ==========================================
-
     setupCleanup() {
         window.addEventListener('beforeunload', () => {
             this.database.cleanup();
@@ -151,10 +109,7 @@ class EssenTrackerApp {
     }
 }
 
-// ==========================================
 // 🎬 APP STARTUP
-// ==========================================
-
 // Initialize app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const app = new EssenTrackerApp();
