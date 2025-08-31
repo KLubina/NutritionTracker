@@ -1,14 +1,9 @@
 # 🔥 Firebase Hosting - Komplette Anleitung
 
-## 📋 Überblick
-Firebase Hosting ist Googles Plattform für das Hosting von Web-Apps. Du bekommst:
-- ✅ **Kostenlos** bis 10GB Hosting
-- ✅ **HTTPS automatisch**
-- ✅ **Globales CDN** (schnell weltweit)
-- ✅ **Echtzeit-Datenbank** (Firestore)
-- ✅ **Authentifizierung** (Login-System)
-
 ---
+## Firebase Profil eröffnen
+
+https://firebase.google.com/
 
 ## 🚀 Teil 1: Grundsetup (Einmalig)
 
@@ -50,7 +45,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 mkdir meine-app
 cd meine-app
 
-# Firebase initialisieren
+# Terminal öffnen und Firebase initialisieren
 firebase init
 
 # Wähle aus:
