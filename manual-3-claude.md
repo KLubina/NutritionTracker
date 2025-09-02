@@ -5,7 +5,7 @@ Firebase Hosting ist Googles Plattform für das Hosting von Web-Apps.
 
 ---
 
-## 🚀 Teil 1: Grundsetup (Einmalig)
+## Grundsetup (Einmalig)
 
 ### **Schritt 1: Node.js installieren**
 1. Gehe zu: https://nodejs.org/
@@ -28,7 +28,7 @@ firebase login
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-## **Teil 2: Firebase-Projekt erstellen**
+## **Firebase-Projekt erstellen**
 1. Gehe zu: https://console.firebase.google.com/
 2. **"Projekt hinzufügen"**
 3. **Projektname** eingeben (z.B. "meine-app")
@@ -57,7 +57,7 @@ firebase init
 - **Single-page app:** `No`
 - **GitHub deployment:** `No` (erstmal überspringen)
 
-## 🚀 Teil 5: App deployen
+## 🚀 App deployen
 
 ### **Deployen:**
 ```bash
@@ -67,6 +67,7 @@ firebase deploy
 ```
 
 ### **Firestore-DB Regeln einstellen**
+```bash
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -79,4 +80,4 @@ service cloud.firestore {
   }
 }
 
----
+```
