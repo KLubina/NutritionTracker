@@ -1,12 +1,7 @@
 # 🔥 Firebase Hosting - Komplette Anleitung
 
 ## 📋 Überblick
-Firebase Hosting ist Googles Plattform für das Hosting von Web-Apps. Du bekommst:
-- ✅ **Kostenlos** bis 10GB Hosting
-- ✅ **HTTPS automatisch**
-- ✅ **Globales CDN** (schnell weltweit)
-- ✅ **Echtzeit-Datenbank** (Firestore)
-- ✅ **Authentifizierung** (Login-System)
+Firebase Hosting ist Googles Plattform für das Hosting von Web-Apps.
 
 ---
 
@@ -33,7 +28,7 @@ firebase login
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-### **Schritt 3: Firebase-Projekt erstellen**
+## **Teil 2: Firebase-Projekt erstellen**
 1. Gehe zu: https://console.firebase.google.com/
 2. **"Projekt hinzufügen"**
 3. **Projektname** eingeben (z.B. "meine-app")
@@ -43,7 +38,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ---
 
-### **Methode B: Existierende HTML-App**
+### **Existierende HTML-App**
 ```bash
 # In deinem App-Ordner
 firebase init
@@ -84,44 +79,4 @@ service cloud.firestore {
   }
 }
 
-
-**Auf Android installieren:**
-1. **Chrome Browser** → App-URL öffnen
-2. **Menü** (3 Punkte) → **"Zum Startbildschirm hinzufügen"**
-3. **App-Icon** erscheint auf Homescreen
-
 ---
-
-## 📖 Zusammenfassung
-
-**Mit Firebase Hosting kannst du:**
-1. **HTML/CSS/JS Apps** kostenlos hosten
-2. **Echtzeit-Datenbanken** hinzufügen
-3. **User-Authentifizierung** implementieren
-4. **Mobile Apps** als PWA erstellen
-5. **Skalierbare Backend-Services** nutzen
-
-**Der Workflow ist immer:**
-```bash
-1. firebase init
-2. Code schreiben
-3. firebase deploy
-4. 🚀 App ist live!
-```
-
-**Deine App läuft dann unter:**
-`https://dein-projekt.web.app`
-
----
-
-## 🔗 Nützliche Links
-
-- **Firebase Console:** https://console.firebase.google.com/
-- **Firebase Dokumentation:** https://firebase.google.com/docs
-- **Firebase CLI Referenz:** https://firebase.google.com/docs/cli
-- **Firestore Regeln:** https://firebase.google.com/docs/firestore/security/rules-structure
-- **Firebase Hosting Docs:** https://firebase.google.com/docs/hosting
-
----
-
-*Firebase macht Web-App Development einfach und skalierbar! 🚀*
