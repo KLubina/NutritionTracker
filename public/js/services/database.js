@@ -27,7 +27,6 @@ class DatabaseService {
             this.setupRealtimeListeners();
             return true;
         } else {
-            console.error('Firebase ist nicht konfiguriert oder db ist nicht verfügbar.');
             return false;
         }
     }
@@ -43,7 +42,6 @@ class DatabaseService {
                     this.syncCallback?.('foods', this.foods);
                 },
                 (error) => {
-                    console.error('Error listening to foods:', error);
                 }
             );
 
@@ -55,11 +53,9 @@ class DatabaseService {
                     this.syncCallback?.('history', this.history);
                 },
                 (error) => {
-                    console.error('Error listening to history:', error);
                 }
             );
         } catch (error) {
-            console.error('Error setting up listeners:', error);
         }
     }
     // #endregion
@@ -73,7 +69,6 @@ class DatabaseService {
                 createdAt: serverTimestamp()
             });
         } catch (error) {
-            console.error('Error adding food:', error);
         }
     }
 
@@ -89,7 +84,6 @@ class DatabaseService {
                 createdAt: serverTimestamp()
             });
         } catch (error) {
-            console.error('Error adding history:', error);
         }
     }
 
@@ -98,7 +92,6 @@ class DatabaseService {
         try {
             await deleteDoc(doc(db, 'history', historyId));
         } catch (error) {
-            console.error('Error deleting history:', error);
         }
     }
     // #endregion
