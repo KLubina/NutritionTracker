@@ -8,7 +8,7 @@ class EssenTrackerApp {
         this.isInitialized = false;
     }
 
-    // 🚀 APP INITIALIZATION
+    // #region APP INITIALIZATION
     init() {
         this.setupEventListeners();
         this.setupGlobalFunctions();
@@ -19,8 +19,9 @@ class EssenTrackerApp {
 
         this.isInitialized = true;
     }
+    // #endregion
 
-    // 🔄 DATA SYNCHRONIZATION
+    // #region DATA SYNCHRONIZATION
     handleDataSync(dataType, data) {
         switch (dataType) {
             case 'foods':
@@ -32,8 +33,9 @@ class EssenTrackerApp {
                 break;
         }
     }
+    // #endregion
 
-    // 🎯 CORE FUNCTIONS
+    //#region  Database Operations
     addFood() {
         const foodName = this.ui.getInputValue();
 
@@ -50,8 +52,9 @@ class EssenTrackerApp {
     deleteHistoryItem(historyId) {
         this.database.deleteHistory(historyId);
     }
+    //#endregion
 
-    // 📅 DATE NAVIGATION
+    //#region DATE NAVIGATION
     changeDate(direction) {
         this.ui.changeDate(direction);
         this.ui.renderHistory(this.database.getHistory(), this.deleteHistoryItem.bind(this));
@@ -61,8 +64,9 @@ class EssenTrackerApp {
         this.ui.jumpToDate(daysOffset);
         this.ui.renderHistory(this.database.getHistory(), this.deleteHistoryItem.bind(this));
     }
+    //#endregion
 
-    // 📑 TAB MANAGEMENT
+    //#region TAB MANAGEMENT
     switchTab(tabName) {
         this.ui.switchTab(tabName);
         
@@ -73,8 +77,9 @@ class EssenTrackerApp {
             this.ui.renderStats(this.database.getHistory());
         }
     }
+    //#endregion
 
-    // 🎧 EVENT LISTENERS
+    // #region EVENT LISTENERS
     setupEventListeners() {
         // Add button click
         document.getElementById('addBtn').addEventListener('click', () => {
@@ -93,8 +98,9 @@ class EssenTrackerApp {
             this.ui.focusInput();
         }, 100);
     }
+    //#region
 
-    // 🌐 GLOBAL FUNCTIONS
+    // #region GLOBAL FUNCTIONS
     setupGlobalFunctions() {
         // Make functions available for onclick handlers
         window.switchTab = this.switchTab.bind(this);
@@ -103,16 +109,18 @@ class EssenTrackerApp {
         window.changeDate = this.changeDate.bind(this);
         window.jumpToDate = this.jumpToDate.bind(this);
     }
+    // #endregion
 
-    // 🧹 CLEANUP
+    // #region CLEANUP
     setupCleanup() {
         window.addEventListener('beforeunload', () => {
             this.database.cleanup();
         });
     }
+    // #endregion
 }
 
-// 🎬 APP STARTUP
+// #region APP STARTUP
 // Initialize app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const app = new EssenTrackerApp();
@@ -121,3 +129,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Make app instance available globally for debugging
 window.EssenTrackerApp = EssenTrackerApp;
+// #endregion
