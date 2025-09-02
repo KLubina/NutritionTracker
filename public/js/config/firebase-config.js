@@ -31,9 +31,7 @@ const isFirebaseConfigured = true;
 try {
     app = initializeApp(firebaseConfig);
     db = getFirestore(app);
-    console.log('✅ Firebase successfully initialized');
 } catch (error) {
-    console.error('❌ Firebase initialization error:', error);
 }
 
 // Export Firebase instances and modules
