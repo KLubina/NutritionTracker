@@ -4,6 +4,18 @@ How I pushed it into GitHub: https://claude.ai/chat/e049ee10-0bea-46b5-892b-bb5a
 
 How the app was created: https://claude.ai/chat/7e463265-6ee5-4a0e-a518-79ace9419355
 
+## **TODO**
+- Data self-deleting after around 90 Day
+- Favorite Food
+-- Introduction of deletion and editing
+-- Showing how much was eaten in the last 90 days (because of deletion)
+-- Quantity ?
+- Export of last 90 days to .csv-file
+- Easier UI
+- Improve Stats-Function
+- Editable Time of eaten food
+- "Gönnung" implementieren, als "Food" und Stats
+
 ## **Workflow für Änderungen: GitHub + Firebase**
 
 ### 1. **Änderungen zu GitHub pushen**
