@@ -69,7 +69,7 @@ class EssenTrackerApp {
     //#region TAB MANAGEMENT
     switchTab(tabName) {
         this.ui.switchTab(tabName);
-        
+
         // Re-render content for specific tabs
         if (tabName === 'history') {
             this.ui.renderHistory(this.database.getHistory(), this.deleteHistoryItem.bind(this));
@@ -100,47 +100,47 @@ class EssenTrackerApp {
     }
     //#region
 
-//#region CSV EXPORT
-exportToCsv() {
-    const history = this.database.getHistory();
-    
-    if (history.length === 0) {
-        alert('Keine Daten zum Exportieren vorhanden!');
-        return;
-    }
+    //#region CSV EXPORT
+    exportToCsv() {
+        const history = this.database.getHistory();
 
-    // CSV Header
-    const csvHeader = 'Datum,Uhrzeit,Gericht\n';
-    
-    // CSV Daten
-    const csvData = history
-        .sort((a, b) => a.timestamp - b.timestamp) // Chronologisch sortieren
-        .map(item => {
-            const date = new Date(item.timestamp).toLocaleDateString('de-DE');
-            const time = item.time;
-            const food = `"${item.food.replace(/"/g, '""')}"`;  // Escape quotes
-            return `${date},${time},${food}`;
-        })
-        .join('\n');
+        if (history.length === 0) {
+            alert('Keine Daten zum Exportieren vorhanden!');
+            return;
+        }
 
-    // Vollständige CSV
-    const csvContent = csvHeader + csvData;
-    
-    // Download erstellen
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    
-    if (link.download !== undefined) {
-        const url = URL.createObjectURL(blob);
-        link.setAttribute('href', url);
-        link.setAttribute('download', `essen-tracker-${new Date().toISOString().split('T')[0]}.csv`);
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        // CSV Header
+        const csvHeader = 'Datum,Uhrzeit,Gericht\n';
+
+        // CSV Daten
+        const csvData = history
+            .sort((a, b) => a.timestamp - b.timestamp) // Chronologisch sortieren
+            .map(item => {
+                const date = new Date(item.timestamp).toLocaleDateString('de-DE');
+                const time = item.time;
+                const food = `"${item.food.replace(/"/g, '""')}"`;  // Escape quotes
+                return `${date},${time},${food}`;
+            })
+            .join('\n');
+
+        // Vollständige CSV
+        const csvContent = csvHeader + csvData;
+
+        // Download erstellen
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+
+        if (link.download !== undefined) {
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `essen-tracker-${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
     }
-}
-//#endregion
+    //#endregion
 
     // #region GLOBAL FUNCTIONS
     setupGlobalFunctions() {
