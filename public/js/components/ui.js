@@ -125,8 +125,6 @@ class UIComponents {
 
   // #region 📊 STATISTICS RENDERING
   renderStats(history) {
-    // Total meals
-    document.getElementById("totalMeals").textContent = history.length;
 
     // Unique days tracked
     const uniqueDays = new Set(
