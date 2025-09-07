@@ -108,6 +108,7 @@ class EssenTrackerApp {
         window.deleteHistoryItem = this.deleteHistoryItem.bind(this);
         window.changeDate = this.changeDate.bind(this);
         window.jumpToDate = this.jumpToDate.bind(this);
+        window.exportToCsv = this.exportToCsv.bind(this);
     }
     // #endregion
 
