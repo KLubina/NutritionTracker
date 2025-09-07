@@ -100,6 +100,48 @@ class EssenTrackerApp {
     }
     //#region
 
+//#region CSV EXPORT
+exportToCsv() {
+    const history = this.database.getHistory();
+    
+    if (history.length === 0) {
+        alert('Keine Daten zum Exportieren vorhanden!');
+        return;
+    }
+
+    // CSV Header
+    const csvHeader = 'Datum,Uhrzeit,Gericht\n';
+    
+    // CSV Daten
+    const csvData = history
+        .sort((a, b) => a.timestamp - b.timestamp) // Chronologisch sortieren
+        .map(item => {
+            const date = new Date(item.timestamp).toLocaleDateString('de-DE');
+            const time = item.time;
+            const food = `"${item.food.replace(/"/g, '""')}"`;  // Escape quotes
+            return `${date},${time},${food}`;
+        })
+        .join('\n');
+
+    // Vollständige CSV
+    const csvContent = csvHeader + csvData;
+    
+    // Download erstellen
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    
+    if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', `essen-tracker-${new Date().toISOString().split('T')[0]}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+}
+//#endregion
+
     // #region GLOBAL FUNCTIONS
     setupGlobalFunctions() {
         // Make functions available for onclick handlers
