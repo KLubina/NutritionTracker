@@ -2,8 +2,8 @@
 
 A simple web app for tracking all my meals with Firebase backend.
 
-![Starting Page](starting-page-NutritionTracker.png)
-![Software Architecture](Software-Architecture-NutritionTracker.png)
+![Starting Page](pictures-for-readme/starting-page-NutritionTracker.png)
+![Software Architecture](pictures-for-readme/Software-Architecture-NutritionTracker.png)
 
 ## Usage
 
