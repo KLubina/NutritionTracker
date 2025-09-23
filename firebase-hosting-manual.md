@@ -1,6 +1,6 @@
-# 🔥 Firebase Hosting - Komplette Anleitung
+# Firebase Hosting - Komplette Anleitung
 
-## 📋 Überblick
+## Überblick
 Firebase Hosting ist Googles Plattform für das Hosting von Web-Apps.
 
 ---
@@ -57,7 +57,7 @@ firebase init
 - **Single-page app:** `No`
 - **GitHub deployment:** `No` (erstmal überspringen)
 
-## 🚀 App deployen
+## App deployen
 
 ### **Deployen:**
 ```bash
