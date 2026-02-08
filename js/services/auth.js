@@ -22,6 +22,13 @@ export async function loginWithGoogle() {
   }
 }
 
+export function loginAsDemo(user) {
+  currentUser = user;
+  if (onAuthCallback) {
+    onAuthCallback(user);
+  }
+}
+
 export function onAuthChanged(callback) {
   onAuthCallback = callback;
   onAuthStateChanged(auth, (user) => {

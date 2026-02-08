@@ -89,6 +89,11 @@ function _setupLoginButton() {
   if (loginBtn) {
     loginBtn.addEventListener("click", _handleLoginClick);
   }
+
+  const demoBtn = document.getElementById("demoLoginBtn");
+  if (demoBtn) {
+    demoBtn.addEventListener("click", _handleDemoLoginClick);
+  }
 }
 
 async function _handleLoginClick() {
@@ -97,6 +102,16 @@ async function _handleLoginClick() {
   } catch (error) {
     alert("Login fehlgeschlagen: " + error.message);
   }
+}
+
+async function _handleDemoLoginClick() {
+  const demoUser = {
+    uid: "demo-user",
+    email: "demo@example.com",
+    displayName: "Demo User",
+  };
+
+  AuthService.loginAsDemo(demoUser);
 }
 
 async function loadAndShowTodayPlan() {
