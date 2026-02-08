@@ -2,9 +2,6 @@
 
 A simple web app for tracking all my meals with Firebase backend.
 
-![Starting Page](pictures-for-readme/starting-page-NutritionTracker.png)
-![Software Architecture](pictures-for-readme/Software-Architecture-NutritionTracker.png)
-
 ## Usage
 
 1. **Add dishes**: Enter your favorite meals
@@ -18,23 +15,3 @@ A simple web app for tracking all my meals with Firebase backend.
 - **Backend**: Firebase Firestore
 - **Hosting**: Firebase Hosting
 - **Design**: Responsive, Mobile-First
-
-## Project Structure
-
-```
-NutritionTracker/
-├── public/
-│   ├── css/
-│   │   └── styles.css
-│   ├── js/
-│   │   ├── app.js
-│   │   ├── components/
-│   │   │   └── ui.js
-│   │   ├── services/
-│   │   │   └── database.js
-│   │   └── config/
-│   │       └── firebase-config.js
-│   └── index.html
-├── firebase-hosting-manual.md
-└── README.md
-```

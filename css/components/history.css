@@ -1,0 +1,70 @@
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-left: 5px solid green;
+    margin-bottom: 10px;
+}
+
+.history-content {
+    flex: 1;
+}
+
+.history-food {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.history-meta {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.history-time {
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+}
+
+.history-time:hover {
+    color: #000;
+}
+
+.history-amount {
+    font-size: 14px;
+    color: #0066cc;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.history-amount:hover {
+    color: #004499;
+}
+
+.history-amount-input {
+    font-size: 14px;
+    padding: 4px 8px;
+    border: 2px solid #0066cc;
+    width: 80px;
+}
+
+.history-date-input {
+    font-size: 14px;
+    padding: 4px 8px;
+    border: 2px solid black;
+}
+
+.delete-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.delete-btn:disabled {
+    background: #ccc;
+}

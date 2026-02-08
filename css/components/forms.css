@@ -1,0 +1,57 @@
+.add-section {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+
+#newFood,
+#newGoennungFood,
+#newDrinkFood {
+    flex: 1;
+    padding: 15px;
+    font-size: 18px;
+    border: 2px solid #999;
+}
+
+#addBtn,
+#addGoennungBtn,
+#addDrinkBtn {
+    background: black;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.grams-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.grams-input-container label {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.grams-input {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 2px solid #999;
+    width: 120px;
+}
+
+.grams-unit {
+    font-size: 16px;
+    color: #666;
+}
+
+.food-edit-input {
+    font-size: 18px;
+    padding: 5px;
+    border: 2px solid black;
+}

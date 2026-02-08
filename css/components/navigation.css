@@ -1,0 +1,45 @@
+.date-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 2px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.date-nav-btn {
+    background: black;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.date-nav-btn:disabled {
+    background: #ccc;
+}
+
+.current-date {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.quick-dates {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.quick-date-btn {
+    background: #ddd;
+    border: 2px solid #999;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.quick-date-btn.active {
+    background: black;
+    color: white;
+}

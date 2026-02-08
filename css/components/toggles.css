@@ -1,0 +1,57 @@
+.goennung-toggle-container {
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+.goennung-toggle-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: opacity 0.2s;
+    padding: 5px 10px;
+}
+
+.goennung-toggle-label:hover {
+    opacity: 0.6;
+}
+
+.goennung-toggle-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.goennung-toggle-radio {
+    position: relative;
+    height: 16px;
+    width: 16px;
+    border: 2px solid #999;
+    border-radius: 50%;
+    background-color: white;
+    transition: all 0.2s;
+}
+
+.goennung-toggle-checkbox:checked + .goennung-toggle-radio {
+    border-color: #48bb78;
+}
+
+.goennung-toggle-checkbox:checked + .goennung-toggle-radio::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #48bb78;
+}
+
+.goennung-toggle-text {
+    font-size: 12px;
+}

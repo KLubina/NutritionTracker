@@ -1,0 +1,15 @@
+.export-section {
+    margin-top: 20px;
+    border-top: 2px solid #ddd;
+    padding-top: 20px;
+}
+
+.export-btn {
+    background: green;
+    color: white;
+    border: none;
+    padding: 20px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 100%;
+}
