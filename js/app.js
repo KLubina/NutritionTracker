@@ -3,6 +3,7 @@ import * as HistoryService from "./services/data/history.js";
 import * as PlannerService from "./services/data/planner.js";
 import * as UI from "./ui/ui.js";
 import * as AuthService from "./services/auth.js";
+import { MockLoader } from "../mock-data/MockLoader.js";
 import { GoennungController } from "./services/controllers/goennung-controller.js";
 import { FoodController } from "./services/controllers/food-controller.js";
 import { HistoryController } from "./services/controllers/history-controller.js";
@@ -11,6 +12,7 @@ import { EventHandler } from "./services/handlers/event-handler.js";
 
 // -- State & Modules --
 let isInitialized = false;
+let isDemoMode = false;
 
 // Controllers
 const goennungController = new GoennungController();
@@ -82,6 +84,10 @@ async function _initializeAppData() {
 function _initServices() {
   FoodsService.init(renderController.handleDataSync.bind(renderController));
   HistoryService.init(renderController.handleDataSync.bind(renderController));
+
+  if (isDemoMode) {
+    MockLoader.setupMockData(renderController);
+  }
 }
 
 function _setupLoginButton() {
@@ -105,6 +111,8 @@ async function _handleLoginClick() {
 }
 
 async function _handleDemoLoginClick() {
+  isDemoMode = true;
+
   const demoUser = {
     uid: "demo-user",
     email: "demo@example.com",

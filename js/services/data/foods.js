@@ -35,6 +35,11 @@ export function cleanup() {
   if (unsubscribe) unsubscribe();
 }
 
+/** Demo mode: inject static mock foods, bypassing Firestore. */
+export function injectMockData(mockFoods) {
+  foodsData = mockFoods;
+}
+
 export function getFoods(category = null) {
   if (category) {
     return foodsData.filter((f) => (f.category || "normal") === category);

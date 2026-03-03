@@ -34,6 +34,11 @@ export function cleanup() {
   if (unsubscribe) unsubscribe();
 }
 
+/** Demo mode: inject static mock history entries, bypassing Firestore. */
+export function injectMockData(mockHistory) {
+  historyData = mockHistory;
+}
+
 export function getHistory() {
   return historyData;
 }
