@@ -29,58 +29,49 @@ export const MOCK_DAY_TEMPLATES = {
   },
 };
 
-// Helper: offset from today (dynamisch)
-function dateStr(offsetDays) {
-  const d = new Date();
-  d.setHours(0, 0, 0, 0);
-  d.setDate(d.getDate() + offsetDays);
+// Generate MOCK_PLANNED_DAYS dynamically: last 90 days + 30 future days
+function dateStrFromDate(d) {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
   const day = String(d.getDate()).padStart(2, "0");
   return `${y}-${m}-${day}`;
 }
 
-// Assign templates to the next 14 days and several past days
-export const MOCK_PLANNED_DAYS = {
-  // ── Past planned days ───────────────────────────────────────────────────
-  [dateStr(-21)]: { templateId: "tpl_training" },
-  [dateStr(-20)]: { templateId: "tpl_rest" },
-  [dateStr(-19)]: { templateId: "tpl_training" },
-  [dateStr(-18)]: { templateId: "tpl_training" },
-  [dateStr(-17)]: { templateId: "tpl_rest" },
-  [dateStr(-16)]: { templateId: "tpl_refeed" },
-  [dateStr(-15)]: { templateId: "tpl_cheat" },
-  [dateStr(-14)]: { templateId: "tpl_training" },
-  [dateStr(-13)]: { templateId: "tpl_rest" },
-  [dateStr(-12)]: { templateId: "tpl_training" },
-  [dateStr(-11)]: { templateId: "tpl_training" },
-  [dateStr(-10)]: { templateId: "tpl_rest" },
-  [dateStr(-9)]: { templateId: "tpl_training" },
-  [dateStr(-8)]: { templateId: "tpl_refeed" },
-  [dateStr(-7)]: { templateId: "tpl_training" },
-  [dateStr(-6)]: { templateId: "tpl_rest" },
-  [dateStr(-5)]: { templateId: "tpl_training" },
-  [dateStr(-4)]: { templateId: "tpl_training" },
-  [dateStr(-3)]: { templateId: "tpl_rest" },
-  [dateStr(-2)]: { templateId: "tpl_training" },
-  [dateStr(-1)]: { templateId: "tpl_refeed" },
+function templateForWeekday(day) {
+  // 0=Sun,1=Mon,...6=Sat
+  switch (day) {
+    case 0:
+      return "tpl_rest";
+    case 1:
+      return "tpl_training";
+    case 2:
+      return "tpl_training";
+    case 3:
+      return "tpl_training";
+    case 4:
+      return "tpl_refeed";
+    case 5:
+      return "tpl_training";
+    case 6:
+      return "tpl_cheat";
+    default:
+      return "tpl_training";
+  }
+}
 
-  // ── Today ───────────────────────────────────────────────────────────────
-  [dateStr(0)]: { templateId: "tpl_training" },
+function generatePlannedDays(daysBack = 89, daysForward = 30) {
+  const out = {};
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-  // ── Future planned days ─────────────────────────────────────────────────
-  [dateStr(1)]: { templateId: "tpl_rest" },
-  [dateStr(2)]: { templateId: "tpl_training" },
-  [dateStr(3)]: { templateId: "tpl_training" },
-  [dateStr(4)]: { templateId: "tpl_rest" },
-  [dateStr(5)]: { templateId: "tpl_refeed" },
-  [dateStr(6)]: { templateId: "tpl_cheat" },
-  [dateStr(7)]: { templateId: "tpl_training" },
-  [dateStr(8)]: { templateId: "tpl_rest" },
-  [dateStr(9)]: { templateId: "tpl_training" },
-  [dateStr(10)]: { templateId: "tpl_training" },
-  [dateStr(11)]: { templateId: "tpl_rest" },
-  [dateStr(12)]: { templateId: "tpl_training" },
-  [dateStr(13)]: { templateId: "tpl_refeed" },
-  [dateStr(14)]: { templateId: "tpl_training" },
-};
+  for (let i = -daysBack; i <= daysForward; i++) {
+    const d = new Date(today);
+    d.setDate(today.getDate() + i);
+    const tpl = templateForWeekday(d.getDay());
+    out[dateStrFromDate(d)] = { templateId: tpl };
+  }
+
+  return out;
+}
+
+export const MOCK_PLANNED_DAYS = generatePlannedDays(89, 30);
