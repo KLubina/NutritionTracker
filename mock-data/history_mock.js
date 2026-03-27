@@ -103,8 +103,8 @@ function pad2(n) {
 
 // ── Generator ──────────────────────────────────────────────────────────────
 function generateHistory() {
-  // Anchor: March 3 2026 (the demo "today")
-  const TODAY = new Date(2026, 2, 3); // month is 0-indexed
+  // Anchor: aktuelles Datum (dynamisch)
+  const TODAY = new Date();
 
   const entries = [];
   let idCounter = 1;

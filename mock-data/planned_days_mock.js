@@ -29,9 +29,10 @@ export const MOCK_DAY_TEMPLATES = {
   },
 };
 
-// Helper: offset from today (2026-03-03)
+// Helper: offset from today (dynamisch)
 function dateStr(offsetDays) {
-  const d = new Date(2026, 2, 3); // March 3 2026 (month 0-indexed)
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
   d.setDate(d.getDate() + offsetDays);
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");

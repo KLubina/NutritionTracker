@@ -20,7 +20,7 @@
 // ── Config ─────────────────────────────────────────────────────────────────
 const SEED = 0xdeadbeef; // change to get a different dataset
 const DAYS = 90; // how many days of history to generate
-const TODAY = new Date(2026, 2, 3); // demo anchor date (March 3 2026)
+const TODAY = new Date(); // dynamisch: aktuelles Datum
 
 // ── Seeded PRNG ─────────────────────────────────────────────────────────────
 function makePrng(seed) {
